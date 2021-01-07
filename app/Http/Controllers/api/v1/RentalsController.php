@@ -12,23 +12,41 @@ use Carbon\Carbon;
 class RentalsController extends Controller
 {
     public function create(Request $request) {
+        $userId = Auth::id();
         $date = Carbon::now();
         $date->toDateString();
         $newDateTime = Carbon::now()->addDays(7);
         $newDateTime->toDateString();
         $rental = DB::table('rentals')->insert([
-            'user_id' => $request->input('userId'),
+            'user_id' => $userId,
             'movieId' => $request->input('movieId'),
             'title' => $request->input('title'),
             'rent_date' => $date,
             'return_date' => newDateTime
-
-
         ]);
 
 
        
-        return response(['user' => Auth::user(), 'access_token' => $accessToken]);
+        return response(['rental' => $rental]);
+       
+    }
+    public function return(Request $request) {
+       
+        $return = DB::table('rentals')->where('id', $request->input('id'))->delete();
+
+
+       
+        return response(['return' => 'Movie returned succesfully']);
+       
+    }
+
+    public function getRentals(Request $request) {
+        $userId = Auth::id();
+        $rentals = DB::select('select * from rentals where user_id = ?', $userId);
+
+
+       
+        return response(['rentals' => $rentals]);
        
     }
 }

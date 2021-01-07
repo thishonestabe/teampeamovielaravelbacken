@@ -47,7 +47,9 @@ class LoginController extends Controller
     }
 
     public function logout(Request $request) {
-        $request->user()->token()->revoke();
+        if (Auth::check()) {
+            Auth::user()->AauthAcessToken()->delete();
+         }
         return response(['message' => 'succesfully loged out']);
     }
 }

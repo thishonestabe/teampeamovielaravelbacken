@@ -22,9 +22,9 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('admin')
         ]);
 
-        DB::table('roles')->insert([
-            'user_id' => 1,
+        // DB::table('roles')->insert([
+        //     'user_id' => 1,
             
-        ]);
+        // ]);
     }
 }

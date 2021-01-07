@@ -24,3 +24,9 @@ Route::prefix('/user')->group( function() {
     Route::post('/register', 'api\v1\LoginController@register');
     
 });
+
+Route::prefix('/rental')->group( function() {
+    Route::middleware('auth:api')->post('/create', 'api\v1\RentalsController@create');
+    
+    
+});

@@ -22,7 +22,7 @@ class RentalsController extends Controller
             'movieId' => $request->input('movieId'),
             'title' => $request->input('title'),
             'rent_date' => $date,
-            'return_date' => newDateTime
+            'return_date' => $newDateTime
         ]);
 
 
@@ -42,7 +42,7 @@ class RentalsController extends Controller
 
     public function getRentals(Request $request) {
         $userId = Auth::id();
-        $rentals = DB::select('select * from rentals where user_id = ?', $userId);
+        $rentals = DB::select('select * from rentals where user_id = ?', [$userId]);
 
 
        

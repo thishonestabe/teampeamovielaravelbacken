@@ -45,4 +45,9 @@ class LoginController extends Controller
         return response(['user' => Auth::user(), 'access_token' => $accessToken]);
        
     }
+
+    public function logout(Request $request) {
+        $request->user()->token()->revoke();
+        return response(['message' => 'succesfully loged out']);
+    }
 }
